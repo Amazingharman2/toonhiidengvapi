@@ -1,7 +1,7 @@
 {
   "name": "toonstream-scraper",
-  "version": "4.0.0",
-  "description": "Vercel edge scraper for toonstream — got-scraping edition (no CF proxy)",
+  "version": "4.1.0",
+  "description": "Vercel edge scraper for toonstream — native fetch edition (Edge Runtime compatible)",
   "main": "api/index.js",
   "type": "module",
   "scripts": {
@@ -11,7 +11,5 @@
   "engines": {
     "node": ">=18.x"
   },
-  "dependencies": {
-    "got-scraping": "^4.0.4"
-  }
+  "dependencies": {}
 }
