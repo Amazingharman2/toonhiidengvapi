@@ -1,7 +1,7 @@
 // api/episode.js
 export const config = { runtime: 'edge' };
 
-import { fetchPage, getBaseUrl } from '../lib/scrape.js';
+import { fetchPage, fetchUrl, getBaseUrl } from '../lib/scrape.js';
 import { normalizeImage, json, guardMethod } from '../lib/helper.js';
 
 function scrapeEpisodeInfo(html) {
@@ -52,13 +52,12 @@ function scrapeEpisodes(html) {
 async function fetchEmbedUrl(originalUrl) {
   try {
     const base = await getBaseUrl();
-    const r = await fetch(
-      `${new URL(base).origin}/api/embed?url=${encodeURIComponent(originalUrl)}&json=1`,
-      { signal: AbortSignal.timeout(10_000) }
+    const res = await fetchUrl(
+      `${new URL(base).origin}/api/embed?url=${encodeURIComponent(originalUrl)}&json=1`
     );
-    if (!r.ok) return null;
-    const d = await r.json();
-    return d.result?.iframe_src || d.result?.redirect_target || null;
+    if (!res.ok) return null;
+    const d = res.json();
+    return d?.result?.iframe_src || d?.result?.redirect_target || null;
   } catch { return null; }
 }
 

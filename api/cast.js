@@ -32,16 +32,15 @@ export default async function handler(request) {
 
     const castSlug = castName.toLowerCase().replace(/\s+/g, '-');
 
-    // Removed /home prefix — cast pages are at /cast_tv/ on the site root
     const path = page > 1
       ? `/cast_tv/${castSlug}/page/${page}/`
       : `/cast_tv/${castSlug}/`;
 
     const { html, baseUrl } = await fetchPage(path);
 
-    const pageTitle = html.match(/<[^>]*class="[^"]*section-title[^"]*"[^>]*>(.*?)<\/[^>]+>/)?.[1]?.trim() ?? castName;
-    const content    = scrapeContent(html);
-    const pagination = scrapePagination(html);
+    const pageTitle    = html.match(/<[^>]*class="[^"]*section-title[^"]*"[^>]*>(.*?)<\/[^>]+>/)?.[1]?.trim() ?? castName;
+    const content      = scrapeContent(html);
+    const pagination   = scrapePagination(html);
     const randomSeries = scrapePostList(html, 'widget_list_movies_series-4');
     const randomMovies = scrapePostList(html, 'widget_list_movies_series-5');
 
