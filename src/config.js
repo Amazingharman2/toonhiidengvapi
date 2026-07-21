@@ -6,4 +6,4 @@
  */
 
 // The site you want to scrape (no trailing slash)
-export const BASE_URL = 'http://toonstream.dad';
+export const BASE_URL = 'http://toon-stream.site';
